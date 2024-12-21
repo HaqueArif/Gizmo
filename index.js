@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // middleware
-app.use(cors({ origin: "https://gizmogalaxy.vercel.app/", credentials: true }));
+app.use(cors());
 app.use(express.json());
 
 // mongodb
@@ -143,7 +143,9 @@ async function run() {
       }
 
       try {
-        const product = await collection.findOne({ _id: new ObjectId(id) });
+        const product = await productsCollection.findOne({
+          _id: new ObjectId(id),
+        });
         console.log("Product fetched:", product);
 
         if (!product) {
